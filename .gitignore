@@ -62,7 +62,6 @@ Thumbs.db
 *.synctex
 *.synctex(busy)
 *.synctex(error)
-*.synctex(error)
 *.fdb_latexmk
 *.fls
 *.fdb_latexmk
@@ -74,3 +73,12 @@ Thumbs.db
 *.out
 *.log
 *.aux
+
+# Ignore LaTeX auxiliary files in the presentation directory
+pre/pre1.1_slides/*.aux
+pre/pre1.1_slides/*.log
+pre/pre1.1_slides/*.nav
+pre/pre1.1_slides/*.out
+pre/pre1.1_slides/*.snm
+pre/pre1.1_slides/*.toc
+pre/pre1.1_slides/*.synctex.gz
