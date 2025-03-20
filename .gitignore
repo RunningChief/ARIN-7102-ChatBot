@@ -49,7 +49,7 @@ index/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
+# Latex except for the main.tex file
 *.aux
 *.log
 *.out
@@ -63,3 +63,14 @@ Thumbs.db
 *.synctex(busy)
 *.synctex(error)
 *.synctex(error)
+*.fdb_latexmk
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.toc
+*.vrb
+*.out
+*.log
+*.aux
