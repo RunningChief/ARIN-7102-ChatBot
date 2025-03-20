@@ -1,0 +1,105 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\title{Project 3: Online Health Science Knowledge Chatbot}
+\subtitle{Methods and Technologies for Sub-Tasks B/C, E/F, L/M}
+\author{Team 3.2}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+% B/C: Keyword Extraction and Inverted Index
+\begin{frame}{Sub-Tasks B/C: Keyword Extraction \& Inverted Index}
+\footnotesize
+\textbf{Objective 1.2: Keyword Extraction and Indexing}
+\begin{itemize}
+    \item \textbf{Method 1: Medical Entity Recognition}
+    \begin{itemize}
+        \item \textcolor{blue}{SpaCy NER Pipeline}:
+        \begin{itemize}
+            \item Pre-trained biomedical models (e.g., \texttt{en\_core\_sci\_md}) for symptom/disease/drug extraction.
+            \item Custom rules via \texttt{Matcher} to handle domain-specific terms (e.g., rare diseases).
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Method 2: Inverted Index Construction}
+    \begin{itemize}
+        \item \textcolor{blue}{Lightweight Indexing with Whoosh}:
+        \begin{itemize}
+            \item Tokenization and stopword removal using \texttt{nltk}.
+            \item Trade-off: Efficiency for small-to-medium datasets (vs. Elasticsearch).
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Tech Stack}:
+    \begin{itemize}
+        \item Python, SpaCy, NLTK, Whoosh.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+% E/F: Query Classification
+\begin{frame}{Sub-Tasks E/F: Query Classification}
+\footnotesize
+\textbf{Objective 2.1/2.2: Topic Classification}
+\begin{itemize}
+    \item \textbf{Method 1: Unsupervised Clustering}
+    \begin{itemize}
+        \item \textcolor{blue}{K-means with TF-IDF/PCA}:
+        \begin{itemize}
+            \item Reduce dimensionality to 50-100 features to avoid the "curse of dimensionality."
+            \item Validate clusters using \texttt{pyLDAvis} for human-in-the-loop refinement.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Method 2: Supervised Fine-Tuning}
+    \begin{itemize}
+        \item \textcolor{blue}{DistilBERT Multi-Label Classification}:
+        \begin{itemize}
+            \item Freeze base layers; train only the classification head for efficiency.
+            \item Optimize for \textcolor{blue}{Macro-F1} to handle class imbalance.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Tech Stack}:
+    \begin{itemize}
+        \item Scikit-learn, HuggingFace Transformers, PyTorch.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+% L/M: Next-Question Prediction
+\begin{frame}{Sub-Tasks L/M: Next-Question Prediction}
+\footnotesize
+\textbf{Objective 5: Context-Aware Prediction}
+\begin{itemize}
+    \item \textbf{Method 1: Session Chain Extraction}
+    \begin{itemize}
+        \item \textcolor{blue}{Regex-Based Parsing}:
+        \begin{itemize}
+            \item Extract [Q→A→Q] chains from structured Amazon conversations.
+            \item Store in \textcolor{blue}{Neo4j} for contextual graph traversal (e.g., symptom→treatment→side-effect).
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Method 2: Generative Prediction}
+    \begin{itemize}
+        \item \textcolor{blue}{GPT-2-small Fine-Tuning}:
+        \begin{itemize}
+            \item Input: [Q1, A1]; Output: Top-3 candidate Q2.
+            \item Beam search (beam=5) with length penalty for diverse yet relevant predictions.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Tech Stack}:
+    \begin{itemize}
+        \item Neo4j, HuggingFace Transformers, Pandas.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}

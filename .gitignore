@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+health_chatbot_env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data files (you might want to include these, depending on size)
+# Data/*.csv
+
+# Model files (often too large for GitHub)
+*.model
+*.pkl
+
+# Whoosh index
+index/
+
+# Environment variables
+.env
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.synctex.gz
+*.synctex
+*.synctex(busy)
+*.synctex(error)
+*.synctex(error)
