@@ -377,8 +377,3 @@ Average weighted F1 score: 0.8245 ± 0.0267
 Model saved to: ./models/topic_classifier_20240315_143022.joblib
 ```
 
-This classification system will:
-- Automatically process new medical QA documents
-- Maintain consistency with existing clustering system
-- Support incremental updates and model iteration
-- Provide reliable topic prediction service
