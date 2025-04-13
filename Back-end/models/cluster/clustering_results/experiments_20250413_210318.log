@@ -1,0 +1,22 @@
+================ 聚类实验 ================
+开始时间: Sun Apr 13 21:03:18 HKT 2025
+==========================================
+
+运行实验: PCA(2) + KMEANS(自动寻找最佳K)
+命令: python cluster_topic_exp.py --name pca2_kmeans_auto --dim_reduction pca --pca_components 2 --clustering kmeans --kmeans_min_k 1 --kmeans_max_k 30 --kmeans_step 2 --db_path /home/dyvm6xra/dyvm6xrauser11/workspace/projects/HKU/Chatbot/Data/database --output_dir ./clustering_results --use_gpu
+开始时间: Sun Apr 13 21:03:19 HKT 2025
+正在加载embeddings...
+从缓存文件加载embeddings，数据形状: (327212, 768)
+使用 pca 进行降维...
+PCA累积解释方差比: 0.1189
+
+=== 寻找最佳K值 ===
+寻找最佳K值...
+结束时间: Sun Apr 13 21:03:30 HKT 2025
+==========================================
+
+所有实验完成，生成分析报告...
+实验全部完成！
+总结果保存在: ./clustering_results
+您可以运行以下命令分析结果:
+python ./clustering_results/analyze_results.py

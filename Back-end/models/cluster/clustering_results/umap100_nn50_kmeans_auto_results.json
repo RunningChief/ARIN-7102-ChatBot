@@ -1,0 +1,127 @@
+{
+  "experiment_name": "umap100_nn50_kmeans_auto",
+  "timestamp": "2025-04-13T20:49:02.435588",
+  "parameters": {
+    "dimension_reduction": {
+      "method": "umap",
+      "n_components": 100,
+      "umap_n_neighbors": 50,
+      "umap_min_dist": 0.2
+    },
+    "clustering": {
+      "method": "kmeans",
+      "n_clusters": 200
+    }
+  },
+  "metrics": {
+    "best_k": 200,
+    "silhouette_score": 0.14801190793514252,
+    "calinski_harabasz_score": 899.6077880859375,
+    "inertia": 75534278656.0
+  },
+  "data_info": {
+    "embeddings_shape": [
+      327212,
+      768
+    ]
+  },
+  "kmeans_optimization": [
+    {
+      "k": 50,
+      "inertia": 99520028672.0,
+      "silhouette": 0.1113329604268074,
+      "calinski": 1165.0343017578125
+    },
+    {
+      "k": 60,
+      "inertia": 97686904832.0,
+      "silhouette": 0.11779922246932983,
+      "calinski": 1089.7498779296875
+    },
+    {
+      "k": 70,
+      "inertia": 95390679040.0,
+      "silhouette": 0.10922928154468536,
+      "calinski": 1068.3463134765625
+    },
+    {
+      "k": 80,
+      "inertia": 92443418624.0,
+      "silhouette": 0.11838990449905396,
+      "calinski": 1094.850830078125
+    },
+    {
+      "k": 90,
+      "inertia": 90642374656.0,
+      "silhouette": 0.11092309653759003,
+      "calinski": 1064.1463623046875
+    },
+    {
+      "k": 100,
+      "inertia": 89497419776.0,
+      "silhouette": 0.12572577595710754,
+      "calinski": 1011.1365966796875
+    },
+    {
+      "k": 110,
+      "inertia": 86902677504.0,
+      "silhouette": 0.1272931843996048,
+      "calinski": 1035.3653564453125
+    },
+    {
+      "k": 120,
+      "inertia": 85093548032.0,
+      "silhouette": 0.13423898816108704,
+      "calinski": 1026.93115234375
+    },
+    {
+      "k": 130,
+      "inertia": 84530896896.0,
+      "silhouette": 0.13491074740886688,
+      "calinski": 970.476806640625
+    },
+    {
+      "k": 140,
+      "inertia": 82480480256.0,
+      "silhouette": 0.12325826287269592,
+      "calinski": 981.5162963867188
+    },
+    {
+      "k": 150,
+      "inertia": 80911769600.0,
+      "silhouette": 0.13609378039836884,
+      "calinski": 975.9232177734375
+    },
+    {
+      "k": 160,
+      "inertia": 80016891904.0,
+      "silhouette": 0.11624258011579514,
+      "calinski": 947.7474975585938
+    },
+    {
+      "k": 170,
+      "inertia": 78906867712.0,
+      "silhouette": 0.13572600483894348,
+      "calinski": 931.4066162109375
+    },
+    {
+      "k": 180,
+      "inertia": 77461528576.0,
+      "silhouette": 0.11898654699325562,
+      "calinski": 929.8435668945312
+    },
+    {
+      "k": 190,
+      "inertia": 77110173696.0,
+      "silhouette": 0.11949349194765091,
+      "calinski": 892.515380859375
+    },
+    {
+      "k": 200,
+      "inertia": 75534278656.0,
+      "silhouette": 0.14567193388938904,
+      "calinski": 899.6077880859375
+    }
+  ],
+  "end_time": "2025-04-13T20:50:19.417138"
+}

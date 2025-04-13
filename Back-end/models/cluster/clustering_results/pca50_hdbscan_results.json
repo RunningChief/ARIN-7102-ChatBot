@@ -1,0 +1,30 @@
+{
+  "experiment_name": "pca50_hdbscan",
+  "timestamp": "2025-04-13T20:46:06.919758",
+  "parameters": {
+    "dimension_reduction": {
+      "method": "pca",
+      "n_components": 50
+    },
+    "clustering": {
+      "method": "hdbscan",
+      "min_cluster_size": 100,
+      "min_samples": 10
+    }
+  },
+  "metrics": {
+    "pca_cumulative_variance": 0.7064546346664429,
+    "silhouette_score": -0.08606606721878052,
+    "calinski_harabasz_score": 249.17269897460938,
+    "n_clusters": 713,
+    "n_noise": 166742,
+    "noise_ratio": 0.5095840005867756
+  },
+  "data_info": {
+    "embeddings_shape": [
+      327212,
+      768
+    ]
+  },
+  "end_time": "2025-04-13T20:46:20.995277"
+}

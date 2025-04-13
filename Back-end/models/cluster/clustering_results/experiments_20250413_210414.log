@@ -1,0 +1,31 @@
+================ 聚类实验 ================
+开始时间: Sun Apr 13 21:04:14 HKT 2025
+==========================================
+
+运行实验: PCA(2) + KMEANS(自动寻找最佳K)
+命令: python cluster_topic_exp.py --name pca2_kmeans_auto --dim_reduction pca --pca_components 2 --clustering kmeans --kmeans_min_k 4 --kmeans_max_k 31 --kmeans_step 2 --db_path /home/dyvm6xra/dyvm6xrauser11/workspace/projects/HKU/Chatbot/Data/database --output_dir ./clustering_results --use_gpu
+开始时间: Sun Apr 13 21:04:14 HKT 2025
+正在加载embeddings...
+从缓存文件加载embeddings，数据形状: (327212, 768)
+使用 pca 进行降维...
+PCA累积解释方差比: 0.1189
+
+=== 寻找最佳K值 ===
+寻找最佳K值...
+最佳聚类数量: 4
+
+=== K-means聚类 (最佳K) ===
+使用K-means进行聚类...
+使用 GPU 加速的 KMeans...
+聚类数量: 4
+轮廓系数: 0.4383
+Calinski-Harabasz指数: 416489.7812
+实验结果已保存至: ./clustering_results/pca2_kmeans_auto_results.json
+结束时间: Sun Apr 13 21:04:37 HKT 2025
+==========================================
+
+所有实验完成，生成分析报告...
+实验全部完成！
+总结果保存在: ./clustering_results
+您可以运行以下命令分析结果:
+python ./clustering_results/analyze_results.py

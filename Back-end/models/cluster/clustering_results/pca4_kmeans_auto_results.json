@@ -1,0 +1,114 @@
+{
+  "experiment_name": "pca4_kmeans_auto",
+  "timestamp": "2025-04-13T21:06:08.634448",
+  "parameters": {
+    "dimension_reduction": {
+      "method": "pca",
+      "n_components": 4
+    },
+    "clustering": {
+      "method": "kmeans",
+      "n_clusters": 4
+    }
+  },
+  "metrics": {
+    "pca_cumulative_variance": 0.18781380355358124,
+    "best_k": 4,
+    "silhouette_score": 0.3465849757194519,
+    "calinski_harabasz_score": 148317.859375,
+    "inertia": 17751.4765625
+  },
+  "data_info": {
+    "embeddings_shape": [
+      327212,
+      768
+    ]
+  },
+  "kmeans_optimization": [
+    {
+      "k": 4,
+      "inertia": 17751.478515625,
+      "silhouette": 0.34325337409973145,
+      "calinski": 148317.859375
+    },
+    {
+      "k": 6,
+      "inertia": 12242.072265625,
+      "silhouette": 0.3347274959087372,
+      "calinski": 158495.5625
+    },
+    {
+      "k": 8,
+      "inertia": 10303.4658203125,
+      "silhouette": 0.3035123646259308,
+      "calinski": 143348.828125
+    },
+    {
+      "k": 10,
+      "inertia": 8861.720703125,
+      "silhouette": 0.3094818890094757,
+      "calinski": 135518.234375
+    },
+    {
+      "k": 12,
+      "inertia": 8123.23486328125,
+      "silhouette": 0.2671239674091339,
+      "calinski": 123656.046875
+    },
+    {
+      "k": 14,
+      "inertia": 7538.1240234375,
+      "silhouette": 0.2539690136909485,
+      "calinski": 114736.7734375
+    },
+    {
+      "k": 16,
+      "inertia": 7041.85791015625,
+      "silhouette": 0.2546381950378418,
+      "calinski": 107967.8515625
+    },
+    {
+      "k": 18,
+      "inertia": 6601.48046875,
+      "silhouette": 0.24289043247699738,
+      "calinski": 102910.1796875
+    },
+    {
+      "k": 20,
+      "inertia": 6264.4365234375,
+      "silhouette": 0.23050056397914886,
+      "calinski": 97953.8046875
+    },
+    {
+      "k": 22,
+      "inertia": 5980.9970703125,
+      "silhouette": 0.2299511432647705,
+      "calinski": 93556.75
+    },
+    {
+      "k": 24,
+      "inertia": 5808.4130859375,
+      "silhouette": 0.20874154567718506,
+      "calinski": 88384.4140625
+    },
+    {
+      "k": 26,
+      "inertia": 5573.9140625,
+      "silhouette": 0.21400383114814758,
+      "calinski": 85287.65625
+    },
+    {
+      "k": 28,
+      "inertia": 5344.5068359375,
+      "silhouette": 0.2166372388601303,
+      "calinski": 82868.8046875
+    },
+    {
+      "k": 30,
+      "inertia": 5179.5029296875,
+      "silhouette": 0.20815764367580414,
+      "calinski": 79978.640625
+    }
+  ],
+  "end_time": "2025-04-13T21:06:26.880193"
+}

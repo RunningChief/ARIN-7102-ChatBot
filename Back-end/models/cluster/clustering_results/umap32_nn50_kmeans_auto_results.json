@@ -1,0 +1,97 @@
+{
+  "experiment_name": "umap32_nn50_kmeans_auto",
+  "timestamp": "2025-04-13T20:58:24.199190",
+  "parameters": {
+    "dimension_reduction": {
+      "method": "umap",
+      "n_components": 32,
+      "umap_n_neighbors": 50,
+      "umap_min_dist": 0.2
+    },
+    "clustering": {
+      "method": "kmeans",
+      "n_clusters": 90
+    }
+  },
+  "metrics": {
+    "best_k": 90,
+    "silhouette_score": 0.1562153697013855,
+    "calinski_harabasz_score": 3143.613037109375,
+    "inertia": 71750369280.0
+  },
+  "data_info": {
+    "embeddings_shape": [
+      327212,
+      768
+    ]
+  },
+  "kmeans_optimization": [
+    {
+      "k": 10,
+      "inertia": 118744186880.0,
+      "silhouette": 0.035887688398361206,
+      "calinski": 4400.54833984375
+    },
+    {
+      "k": 30,
+      "inertia": 96716873728.0,
+      "silhouette": 0.12107087671756744,
+      "calinski": 4246.1376953125
+    },
+    {
+      "k": 50,
+      "inertia": 83748642816.0,
+      "silhouette": 0.14008347690105438,
+      "calinski": 3935.85595703125
+    },
+    {
+      "k": 70,
+      "inertia": 75246592000.0,
+      "silhouette": 0.12798531353473663,
+      "calinski": 3646.349853515625
+    },
+    {
+      "k": 90,
+      "inertia": 71750402048.0,
+      "silhouette": 0.15174849331378937,
+      "calinski": 3143.611083984375
+    },
+    {
+      "k": 110,
+      "inertia": 69779808256.0,
+      "silhouette": 0.07345451414585114,
+      "calinski": 2723.873779296875
+    },
+    {
+      "k": 130,
+      "inertia": 67673022464.0,
+      "silhouette": 0.06941325962543488,
+      "calinski": 2452.010986328125
+    },
+    {
+      "k": 150,
+      "inertia": 65930342400.0,
+      "silhouette": 0.08717695623636246,
+      "calinski": 2236.880859375
+    },
+    {
+      "k": 170,
+      "inertia": 64461365248.0,
+      "silhouette": 0.07599224150180817,
+      "calinski": 2061.07958984375
+    },
+    {
+      "k": 190,
+      "inertia": 63287922688.0,
+      "silhouette": 0.07071465253829956,
+      "calinski": 1909.1131591796875
+    },
+    {
+      "k": 210,
+      "inertia": 61776232448.0,
+      "silhouette": 0.06931451708078384,
+      "calinski": 1806.847900390625
+    }
+  ],
+  "end_time": "2025-04-13T20:59:01.579142"
+}

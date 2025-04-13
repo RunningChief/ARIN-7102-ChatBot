@@ -1,0 +1,31 @@
+{
+  "experiment_name": "umap2_nn50_hdbscan",
+  "timestamp": "2025-04-13T20:47:16.886392",
+  "parameters": {
+    "dimension_reduction": {
+      "method": "umap",
+      "n_components": 2,
+      "umap_n_neighbors": 50,
+      "umap_min_dist": 0.2
+    },
+    "clustering": {
+      "method": "hdbscan",
+      "min_cluster_size": 100,
+      "min_samples": 10
+    }
+  },
+  "metrics": {
+    "silhouette_score": -0.1169881597161293,
+    "calinski_harabasz_score": 1952.2601318359375,
+    "n_clusters": 18,
+    "n_noise": 30221,
+    "noise_ratio": 0.09235908218524994
+  },
+  "data_info": {
+    "embeddings_shape": [
+      327212,
+      768
+    ]
+  },
+  "end_time": "2025-04-13T20:47:33.393388"
+}

@@ -1,0 +1,98 @@
+================ 聚类实验 ================
+开始时间: Sun Apr 13 20:47:08 HKT 2025
+==========================================
+
+运行实验: UMAP(2, n_neighbors=50) + HDBSCAN
+命令: python cluster_topic_exp.py --name umap2_nn50_hdbscan --dim_reduction umap --umap_components 2 --umap_neighbors 50 --umap_min_dist 0.2 --clustering hdbscan --db_path /home/dyvm6xra/dyvm6xrauser11/workspace/projects/HKU/Chatbot/Data/database --output_dir ./clustering_results --use_gpu
+开始时间: Sun Apr 13 20:47:08 HKT 2025
+正在加载embeddings...
+从缓存文件加载embeddings，数据形状: (327212, 768)
+使用 umap 进行降维...
+使用 GPU 加速的 UMAP...
+[2025-04-13 20:47:17.915] [CUML] [info] build_algo set to brute_force_knn because random_state is given
+[2025-04-13 20:47:17.956] [CUML] [debug] Computing KNN Graph
+[2025-04-13 20:47:22.345] [CUML] [debug] Computing fuzzy simplicial set
+
+=== HDBSCAN聚类 ===
+使用HDBSCAN进行聚类...
+使用 GPU 加速的 HDBSCAN...
+发现 18 个聚类
+噪声点数量: 30221 (9.24%)
+轮廓系数: -0.1170
+Calinski-Harabasz指数: 1952.2601
+实验结果已保存至: ./clustering_results/umap2_nn50_hdbscan_results.json
+结束时间: Sun Apr 13 20:47:34 HKT 2025
+==========================================
+
+运行实验: UMAP(2, n_neighbors=30) + HDBSCAN
+命令: python cluster_topic_exp.py --name umap2_nn30_hdbscan --dim_reduction umap --umap_components 2 --umap_neighbors 30 --umap_min_dist 0.2 --clustering hdbscan --db_path /home/dyvm6xra/dyvm6xrauser11/workspace/projects/HKU/Chatbot/Data/database --output_dir ./clustering_results --use_gpu
+开始时间: Sun Apr 13 20:47:34 HKT 2025
+正在加载embeddings...
+从缓存文件加载embeddings，数据形状: (327212, 768)
+使用 umap 进行降维...
+使用 GPU 加速的 UMAP...
+[2025-04-13 20:47:42.484] [CUML] [info] build_algo set to brute_force_knn because random_state is given
+[2025-04-13 20:47:42.528] [CUML] [debug] Computing KNN Graph
+[2025-04-13 20:47:46.837] [CUML] [debug] Computing fuzzy simplicial set
+
+=== HDBSCAN聚类 ===
+使用HDBSCAN进行聚类...
+使用 GPU 加速的 HDBSCAN...
+发现 130 个聚类
+噪声点数量: 125587 (38.38%)
+轮廓系数: -0.3513
+Calinski-Harabasz指数: 1815.1182
+实验结果已保存至: ./clustering_results/umap2_nn30_hdbscan_results.json
+结束时间: Sun Apr 13 20:47:55 HKT 2025
+==========================================
+
+运行实验: UMAP(2, n_neighbors=50) + KMEANS(自动寻找最佳K)
+命令: python cluster_topic_exp.py --name umap2_nn50_kmeans_auto --dim_reduction umap --umap_components 2 --umap_neighbors 50 --umap_min_dist 0.2 --clustering kmeans --db_path /home/dyvm6xra/dyvm6xrauser11/workspace/projects/HKU/Chatbot/Data/database --output_dir ./clustering_results --use_gpu
+开始时间: Sun Apr 13 20:47:55 HKT 2025
+正在加载embeddings...
+从缓存文件加载embeddings，数据形状: (327212, 768)
+使用 umap 进行降维...
+使用 GPU 加速的 UMAP...
+[2025-04-13 20:48:03.353] [CUML] [info] build_algo set to brute_force_knn because random_state is given
+[2025-04-13 20:48:03.394] [CUML] [debug] Computing KNN Graph
+[2025-04-13 20:48:07.789] [CUML] [debug] Computing fuzzy simplicial set
+
+=== 寻找最佳K值 ===
+寻找最佳K值...
+最佳聚类数量: 50
+
+=== K-means聚类 (最佳K) ===
+使用K-means进行聚类...
+使用 GPU 加速的 KMeans...
+聚类数量: 50
+轮廓系数: 0.3515
+Calinski-Harabasz指数: 162270.9062
+实验结果已保存至: ./clustering_results/umap2_nn50_kmeans_auto_results.json
+结束时间: Sun Apr 13 20:48:54 HKT 2025
+==========================================
+
+运行实验: UMAP(100, n_neighbors=50) + KMEANS(自动寻找最佳K)
+命令: python cluster_topic_exp.py --name umap100_nn50_kmeans_auto --dim_reduction umap --umap_components 100 --umap_neighbors 50 --umap_min_dist 0.2 --clustering kmeans --db_path /home/dyvm6xra/dyvm6xrauser11/workspace/projects/HKU/Chatbot/Data/database --output_dir ./clustering_results --use_gpu
+开始时间: Sun Apr 13 20:48:54 HKT 2025
+正在加载embeddings...
+从缓存文件加载embeddings，数据形状: (327212, 768)
+使用 umap 进行降维...
+使用 GPU 加速的 UMAP...
+[2025-04-13 20:49:03.555] [CUML] [info] build_algo set to brute_force_knn because random_state is given
+[2025-04-13 20:49:03.598] [CUML] [debug] Computing KNN Graph
+[2025-04-13 20:49:08.016] [CUML] [debug] Computing fuzzy simplicial set
+
+=== 寻找最佳K值 ===
+寻找最佳K值...
+最佳聚类数量: 200
+
+=== K-means聚类 (最佳K) ===
+使用K-means进行聚类...
+使用 GPU 加速的 KMeans...
+聚类数量: 200
+轮廓系数: 0.1480
+Calinski-Harabasz指数: 899.6078
+实验结果已保存至: ./clustering_results/umap100_nn50_kmeans_auto_results.json
+结束时间: Sun Apr 13 20:50:20 HKT 2025
+==========================================
+

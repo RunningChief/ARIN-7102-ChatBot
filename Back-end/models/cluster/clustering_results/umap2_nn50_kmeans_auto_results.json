@@ -1,0 +1,97 @@
+{
+  "experiment_name": "umap2_nn50_kmeans_auto",
+  "timestamp": "2025-04-13T20:56:16.564757",
+  "parameters": {
+    "dimension_reduction": {
+      "method": "umap",
+      "n_components": 2,
+      "umap_n_neighbors": 50,
+      "umap_min_dist": 0.2
+    },
+    "clustering": {
+      "method": "kmeans",
+      "n_clusters": 30
+    }
+  },
+  "metrics": {
+    "best_k": 30,
+    "silhouette_score": 0.37039080262184143,
+    "calinski_harabasz_score": 171740.859375,
+    "inertia": 3078802432.0
+  },
+  "data_info": {
+    "embeddings_shape": [
+      327212,
+      768
+    ]
+  },
+  "kmeans_optimization": [
+    {
+      "k": 10,
+      "inertia": 8350004224.0,
+      "silhouette": 0.3424452245235443,
+      "calinski": 181105.15625
+    },
+    {
+      "k": 30,
+      "inertia": 3078798848.0,
+      "silhouette": 0.37201768159866333,
+      "calinski": 171740.859375
+    },
+    {
+      "k": 50,
+      "inertia": 1988526592.0,
+      "silhouette": 0.35197997093200684,
+      "calinski": 161022.90625
+    },
+    {
+      "k": 70,
+      "inertia": 1512116224.0,
+      "silhouette": 0.3413013219833374,
+      "calinski": 151861.5
+    },
+    {
+      "k": 90,
+      "inertia": 1198051584.0,
+      "silhouette": 0.3373381495475769,
+      "calinski": 149564.265625
+    },
+    {
+      "k": 110,
+      "inertia": 1003507136.0,
+      "silhouette": 0.33430829644203186,
+      "calinski": 146359.296875
+    },
+    {
+      "k": 130,
+      "inertia": 866655360.0,
+      "silhouette": 0.34003353118896484,
+      "calinski": 143589.921875
+    },
+    {
+      "k": 150,
+      "inertia": 779439808.0,
+      "silhouette": 0.33308467268943787,
+      "calinski": 138462.109375
+    },
+    {
+      "k": 170,
+      "inertia": 710841664.0,
+      "silhouette": 0.331617146730423,
+      "calinski": 134035.59375
+    },
+    {
+      "k": 190,
+      "inertia": 632659712.0,
+      "silhouette": 0.32444432377815247,
+      "calinski": 134868.78125
+    },
+    {
+      "k": 210,
+      "inertia": 559261952.0,
+      "silhouette": 0.32140475511550903,
+      "calinski": 138172.609375
+    }
+  ],
+  "end_time": "2025-04-13T20:56:53.238859"
+}
