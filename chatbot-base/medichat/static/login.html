@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Q&A System - Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div id="register-success" class="alert success" style="display:none;">
+            Registration successful! Please login with your account
+>
+        </div>
+        <h1>Medical Q&A System</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" id="loginButton">Sign in</button>
+            <p>Don't have an account yet?<a href="/static/register.html">Sign up</a></p>
+        </form>
+        <script>
+            console.log('登录页面加载完成');
+            // 确保JS文件加载后执行
+            if (typeof setupLogin === 'function') {
+                setupLogin();
+            } else {
+                console.error('auth.js未正确加载');
+            }
+        </script>
+    </div>
+    <script>
+        // 验证JS是否加载
+        console.log('auth.js 加载检查');
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            console.log('表单提交事件触发');
+            e.preventDefault();
+        });
+    </script>
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>

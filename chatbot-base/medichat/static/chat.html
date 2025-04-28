@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Q&A</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <h1>Medical Q&A Assistant</h1>
+
+        <div class="user-info">
+            <div class="user-controls">
+                <div class="user-dropdown">
+                    <div class="user-icon" id="user-icon">
+                        <span id="username-display"></span>
+                    </div>
+                    <script>
+                        document.getElementById('username-display').textContent = 
+                            localStorage.getItem('username') || '用户';
+                    </script>
+                    <div class="dropdown-content">
+                        <a href="/static/change_password.html">Change Password</a>
+                    </div>
+                </div>
+                <button id="logout-button" class="logout-btn">Log out</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <!-- 会话侧边栏将通过session_manager.js动态生成 -->
+        <div id="session-sidebar" class="session-sidebar"></div>
+
+        <!-- 主聊天区域 -->
+        <div class="main-content">
+            <div class="chat-container">
+                <div id="chat-messages"></div>
+                <div class="input-container">
+                    <input type="text" id="message-input" placeholder="Please enter your symptoms...">
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登出确认对话框 -->
+    <div id="logoutConfirm" class="confirm-dialog" style="display:none;">
+        <div class="confirm-content">
+            <h3>Notice</h3>
+            <p>You will log out after <span id="countdown">3</span> s</p>
+            <div class="confirm-buttons">
+                <button id="cancelLogout">Cancel</button>
+                <button id="confirmLogout">Log out</button>
+            </div>
+        </div>
+    </div>
+    <!-- 加载会话管理器脚本 -->
+    <script src="/static/session_manager.js"></script>
+    
+    <!-- 综合初始化脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('开始初始化所有功能...');
+            
+            // 1. 初始化会话管理器
+            if (typeof SessionManager !== 'undefined') {
+                window.sessionManager = new SessionManager(false);
+                window.sessionManager.initElements();
+                window.sessionManager.loadSessions();
+                
+                // 绑定新对话按钮
+                const newChatBtn = document.getElementById('new-chat-button');
+                if (newChatBtn) {
+                    newChatBtn.addEventListener('click', function() {
+                        window.sessionManager.createSession();
+                    });
+                }
+            } else {
+                console.error('SessionManager未定义，请确保session_manager.js已正确加载');
+            }
+
+            // 2. 初始化聊天功能
+            console.log('初始化聊天功能...');
+            const chatContainer = document.getElementById('chat-messages');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const token = localStorage.getItem('authToken');
+
+            if (!chatContainer || !messageInput || !sendButton) {
+                console.error('聊天功能初始化失败：缺少必要元素');
+                return;
+            }
+
+            // 添加欢迎消息
+            const welcomeMsg = document.createElement('div');
+            welcomeMsg.className = 'message bot-message';
+            welcomeMsg.textContent = 'Hello, I am your medical assistant. May I ask if you have any symptoms？';
+            chatContainer.appendChild(welcomeMsg);
+
+            // 发送消息函数
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (!message) return;
+
+                console.log('发送消息:', message);
+
+                // 显示用户消息
+                const userMsg = document.createElement('div');
+                userMsg.className = 'message user-message';
+                userMsg.textContent = message;
+                chatContainer.appendChild(userMsg);
+
+                messageInput.value = '';
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                // 显示"思考中"
+                const thinkingMsg = document.createElement('div');
+                thinkingMsg.className = 'message bot-message';
+                thinkingMsg.textContent = '思考中...';
+                chatContainer.appendChild(thinkingMsg);
+
+                // 发送到后端
+                fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ message })
+                })
+                .then(response => {
+                    if (response.status === 401) {
+                        logout();
+                        throw new Error('请重新登录');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    chatContainer.removeChild(thinkingMsg);
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'message bot-message';
+                    botMsg.textContent = data.response;
+                    chatContainer.appendChild(botMsg);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                })
+                .catch(error => {
+                    chatContainer.removeChild(thinkingMsg);
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'message bot-message';
+                    errorMsg.textContent = '发送失败: ' + error.message;
+                    chatContainer.appendChild(errorMsg);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                });
+            }
+
+            // 绑定发送按钮
+            sendButton.addEventListener('click', sendMessage);
+
+            // 绑定Enter键
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // 3. 初始化用户下拉菜单功能
+            console.log('初始化用户下拉菜单功能...');
+            const userIcon = document.getElementById('user-icon');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            
+            // 点击切换下拉菜单
+            userIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownContent.classList.toggle('show');
+            });
+
+            // 点击页面其他区域关闭下拉菜单
+            document.addEventListener('click', function() {
+                dropdownContent.classList.remove('show');
+            });
+
+            // 阻止下拉菜单内部点击事件冒泡
+            dropdownContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // 4. 初始化登出功能
+            console.log('初始化登出功能...');
+            const logoutBtn = document.getElementById('logout-button');
+            const confirmDialog = document.getElementById('logoutConfirm');
+            const countdownEl = document.getElementById('countdown');
+            const cancelBtn = document.getElementById('cancelLogout');
+            const confirmBtn = document.getElementById('confirmLogout');
+
+            if (!logoutBtn || !confirmDialog || !countdownEl || !cancelBtn || !confirmBtn) {
+                console.error('登出功能初始化失败：缺少必要元素');
+                return;
+            }
+
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('登出按钮点击');
+
+                // 显示对话框
+                confirmDialog.style.display = 'flex';
+                let seconds = 5;
+                countdownEl.textContent = seconds;
+
+                // 倒计时
+                const timer = setInterval(() => {
+                    seconds--;
+                    countdownEl.textContent = seconds;
+                    if (seconds <= 0) {
+                        clearInterval(timer);
+                        doLogout();
+                    }
+                }, 1000);
+
+                // 取消处理
+                const cancelHandler = () => {
+                    clearInterval(timer);
+                    confirmDialog.style.display = 'none';
+                    cancelBtn.removeEventListener('click', cancelHandler);
+                };
+
+                cancelBtn.addEventListener('click', cancelHandler);
+
+                // 立即登出
+                confirmBtn.addEventListener('click', () => {
+                    clearInterval(timer);
+                    doLogout();
+                });
+
+                function doLogout() {
+                    console.log('执行登出操作');
+                    localStorage.removeItem('authToken');
+                    window.location.href = '/static/login.html';
+                }
+            });
+
+            console.log('所有功能初始化完成');
+        });
+    </script>
+</body>
+</html>
+
