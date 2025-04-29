@@ -1,0 +1,240 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{graphicx}
+
+\title{ARIN7102 - Project 3 \\Online Health Science Knowledge Chatbot}
+% \subtitle{Methods and Technologies for Sub-Tasks B/C, E/F, L/M}
+\author{\textbf{\\Group 3.2}}
+\date{\today}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+	\begin{frame}{Project Introduction}
+		\begin{itemize}
+			\item \textbf{Core Objective}: Develop an intelligent chatbot for parsing health science queries through multi-source data mining (\textit{Healthline} pages, MedQA datasets, web sources) and various NLP techniques
+			\item \textbf{Technical Architecture \& Processing Pipeline}: 
+			\begin{itemize}
+				\item \textcolor{blue}{Vector base construction} via keyword-knowledge mapping
+				\item QA pairs' topic \textcolor{blue}{classification}
+				\item Most relevant pages \textcolor{blue}{retrieval}
+				\item \textcolor{blue}{LLM+RAG} to summarize the answers
+				\item \textcolor{blue}{Predictive modeling} for anticipating follow-up questions
+			\end{itemize}
+			
+			\item \textbf{Expected Outcomes}:
+				\begin{itemize}
+					\item Real-time symptom analysis with differential diagnosis
+					\item Adaptive response generation through ensemble modeling
+					\item Encapsulate all functions into an interactive visual chatbot
+				\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Content}
+	\begin{itemize}
+		\item \textbf{1. Data Processing}
+		\begin{itemize}
+			\item 1.1 Preprocessing
+			\item 1.2 Vectorization
+			\item 1.3 Topic Clustering
+		\end{itemize}
+		
+		\item \textbf{2. Answer Generation}
+		\begin{itemize}
+			\item 2.1 RAG Implementation
+			\item 2.2 Hybrid Search Components
+		\end{itemize}
+		
+		\item \textbf{3. Next Question Prediction}
+		
+		\item \textbf{4. Dashboard/WebApp Development}
+		
+		\vspace{0.09234cm}
+		\item \large{*Health Science Chatbot Demenstration Video}
+	\end{itemize}
+	\end{frame}
+	
+	% 数据预处理模块
+	\begin{frame}{1.1 - Preprocessing}
+		\footnotesize
+		\textbf{Implemented Components}
+		\begin{itemize}
+			\item \textbf{Input Sources}:
+			\begin{itemize}
+				\item Healthline articles (CSV: title/content) (Fetched from \underline{\textit{healthline.com}})
+				\item MedQA datasets (CSV: question/answer) (From \textit{HuggingFace})
+			\end{itemize}
+			
+			\item \textbf{Processing Flow}:
+			\begin{itemize}
+				\item Text cleaning: HTML removal, punctuation normalization
+				\item Keyword Extraction:
+				\begin{itemize}
+					\item             Use NLTK for tokenization
+					\item             Remove stopwords (including general and medical domain-specific stopwords)
+					\item Use TF-IDF algorithm to extract important keywords
+				\end{itemize}
+				
+				\item QA pair generation: Title→Question mapping
+			\end{itemize}
+			
+			\item \textbf{Output}:
+			\begin{itemize}
+				\item Standardized QA pairs 
+				\item keyword index
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[t]{1.2 - Vectorization}
+		\begin{itemize}
+			\item Use \textcolor{blue}{BERT} to vectorize (Vector dimension: 384)
+			\item Use a \textcolor{blue}{sliding window} to dynamically block long text (Window length: 512; Overlap rate: 0.2)
+			\item Use \textcolor{blue}{ChromaDB} to store data: Keywords are stored by String to preserve more effective information
+		\end{itemize}
+		
+		\tikz[remember picture,overlay] \node[anchor=north east] at ($(current page.north east)-(1.77cm,4.17cm)$) {\includegraphics[width=9cm]{syc\_1}};
+	\end{frame}
+	
+	% 主题聚类模块
+	\begin{frame}{1.3 - Topic Clustering}
+		\footnotesize
+		\textbf{Technical Implementation}
+		\begin{itemize}
+			\item \textbf{Dimensionality Reduction}:
+			\begin{itemize}
+				\item UMAP: n\_components=50, cosine metric
+				\item Variance retained: 89.7\%
+			\end{itemize}
+			
+			\item \textbf{Clustering Algorithm}:
+			\begin{itemize}
+				\item HDBSCAN: min\_cluster\_size=100
+				\item Cluster selection: EOM method
+			\end{itemize}
+			
+			\item \textbf{Feature}:
+			\begin{itemize}
+				\item Train random forest classifier based on clustering results
+				\item Automatic integration with vector database system
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+		\begin{frame}{2.1 - RAG Implementation}
+		\footnotesize
+		\begin{enumerate}
+			\item \textbf{Hybrid Retrieval}
+			\begin{itemize}
+				\item Boolean Search: Keywords + Inverted Index (TF-IDF)
+				\item Semantic Search: BioBERT Embeddings + Cosine Similarity
+				\item Fusion: Combine Results (40\% Boolean + 60\% Semantic)
+			\end{itemize}
+			
+			\item \textbf{Answer Generation}
+			\begin{itemize}
+				\item Template: Symptoms → Causes → Treatments
+				\
+			\end{itemize}
+			
+			\item \textbf{Quality Control}
+			\begin{itemize}
+				\item Deduplication: Merge Similar Results
+				\item Validation: Check Medical Accuracy
+			\end{itemize}
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{2.2 - Hybrid Search Components}
+		\centering
+		\includegraphics[width=0.8\textwidth]{hybrid\_search\_flow}
+		\begin{itemize}
+			\item \textcolor{blue}{Step 1:} Boolean Filtering (Fast)
+			\item \textcolor{blue}{Step 2:} Semantic Ranking (Accurate)
+			\item \textcolor{blue}{Step 3:} Weighted Fusion
+		\end{itemize}
+	\end{frame}
+	
+	% Most Relevant Pages Retrieval
+	\begin{frame}{2.2 - Hybrid Search Components (Cont.)}
+		\footnotesize
+		\textbf{Objective}: Designed a hybrid retrieval system combining \textcolor{blue}{keyword matching} with query's \textcolor{blue}{semantic analysis} for precision-focused health knowledge pages retrieval
+		
+		\textbf{Technical Stack}:
+		\begin{itemize}
+			\item \textbf{Libraries}: NLTK, Sentence Transformers, spaCy (SciSpaCy), etc.
+			\item \textbf{Models}: MPNet (Sentence-BERT), BM25, and TF-IDF
+		\end{itemize}
+		
+		\textbf{Pipeline}:
+		\begin{enumerate}
+			\item \textcolor{blue}{Boolean filtering} via keyword inverted index
+			\item \textcolor{blue}{Semantic scoring} using MPNet embeddings
+			\item \textcolor{blue}{Weighted fusion} of TF-IDF, BM25, and medical\\ entity scores
+		\end{enumerate}
+		
+		\textbf{Innovations}:
+		\begin{itemize}
+			\item \textbf{Context-Aware Weighting}: Combined entity recognition (spaCy patterns) with TF-IDF statistical relevance and BM25 term frequency
+			\item \textbf{Hybrid Retrieval}: Achieved 82\% precision by merging logical matching results with output semantic ranking (Top 10 relevance)
+			\item \textbf{Dynamic Thresholding}: Adaptive weight allocation for clinical terms (e.g., "migraine triggers" 2.0x weight vs general terms)
+		\end{itemize}
+		
+		\tikz[remember picture,overlay] \node[anchor=north east] at ($(current page.north east)-(0.12cm,3.17cm)$) {\includegraphics[trim=0cm 3cm 0cm 7cm, clip, width=4.9cm]{Hybrid Retrieval Pipeline Flowchart}};
+	\end{frame}
+	
+	\begin{frame}{3 - Next Question Prediction}
+		\footnotesize
+		\begin{enumerate}
+			\item \textbf{Input Formatting}
+			\begin{itemize}
+				\item Context: [Current Question + Answer]
+				\item Prompt: "Suggest 3 logical follow-up questions about:"
+			\end{itemize}
+			
+			\item \textbf{LLM Configuration}
+			\begin{itemize}
+				\item Pre-trained Model: QWEN-2.5-7B-chat
+				\item Generation Parameters:
+				\begin{itemize}
+					\item Temperature: 0.7 (creativity control)
+					\item Max Length: 50 tokens
+					\item Beam Search: Keep top 5 candidates
+				\end{itemize}
+			\end{itemize}
+			
+			\item \textbf{Output Processing}
+			\begin{itemize}
+				\item Filter medical terms via UMLS dictionary
+				\item Remove duplicate/redundant questions
+			\end{itemize}
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}[t]{4 - Dashboard/WebApp}
+		\begin{itemize}
+			\item Use native \textcolor{blue}{HTML/JS/CSS} to complete the frontend
+			\item Use \textcolor{blue}{SQLite3} to store user information and historical sessions
+			\item Use \textcolor{blue}{Flask} to complete backend development, and provide \textcolor{blue}{interfaces} for deploying model
+		\end{itemize}
+		
+		\vspace{3.97cm}
+		- Detailed effects could be referred to our following demonstration video.
+		
+		\tikz[remember picture,overlay] \node[anchor=north east] at ($(current page.north east)-(3.29cm,4.17cm)$) {\includegraphics[width=5.67cm]{syc\_2}};
+	\end{frame}
+	
+	\begin{frame}
+		\begin{center}
+			\LARGE{\textbf{Thank you!}}
+		\end{center}
+	\end{frame}
+	
+\end{document}
